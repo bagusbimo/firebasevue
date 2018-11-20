@@ -2,14 +2,15 @@
 <div class="admin">
     <div class="page-header">
       <br>
-      <h1>Kafe TETI Firebase Vue</h1>
+      <h1 class="display-4">Kafe TETI Firebase Vue</h1>
+      <h6>Lower Ground DTETI Depan Workshop</h6>
     </div>
-    <div class="card">
+    <div class="card mb-3">
       <div class="card-header">
-        <h3>List Dagangan</h3>
+        <h4>List Dagangan</h4>
       </div>
-      <div class="card-body">
-        <table class="table table-striped">
+      <div class="table-responsive">
+        <table class="table table-sm">
           <thead>
             <tr>
               <th>Nama</th>

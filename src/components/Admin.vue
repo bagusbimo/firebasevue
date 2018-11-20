@@ -5,48 +5,52 @@
       <h1>Kafe TETI Firebase Vue Admin</h1>
     </div>
     <div class="card">
-  <div class="card-header">Tambah Dagangan</div>
+  <div class="card-header">
+    <h4>Tambah Dagangan</h4>
+  </div>
   <div class="card-body">
     <form id="form"
-          class="form-inline"
           @submit.prevent="addDagangan">
-      <div class="form-group mb-2">
+      <div class="form-group row mx-sm-3 mb-2">
         <label for="nama" class="sr-only">Nama</label>
         <input id="nama"
                type="text"
                class="form-control"
-               placeholder="Nama"
+               placeholder="Nama Dagangan"
                v-model="newDagangan.nama" />
       </div>
-      <div class="form-group mx-sm-3 mb-2">
+      <div class="form-group row mx-sm-3 mb-2">
         <label for="kuantitas" class="sr-only">Stok</label>
         <input id="kuantitas"
-               type="text"
+               type="number"
                class="form-control"
                placeholder="Kuantitas"
                v-model="newDagangan.kuantitas" />
       </div>
-      <div class="form-group mb-2">
+      <div class="form-group row mx-sm-3 mb-2">
         <label for="harga" class="sr-only">Harga</label>
         <input id="harga"
-               type="text"
+               type="number"
                class="form-control"
-               placeholder="Rp"
+               placeholder="Harga (Rp)"
                v-model="newDagangan.harga" />
       </div>
-
+      <small id="noduplicate" class="text-muted">
+      Pastikan tidak ada data yang terduplikasi
+      </small>
     </form>
-          <div>
-        <button class="btn btn-primary mx-sm-3 mb-2" @click="addDagangan(dagangan)">Tambahkan</button>
-      </div>
+    
+        <div>
+        <button class="btn btn-primary btn-sm mx-sm-3 mb-2" @click="addDagangan(dagangan)">Tambahkan</button>
+        </div>
   </div>
 </div>
     <div class="card">
       <div class="card-header">
-        <h3>List Dagangan</h3>
+        <h4>List Dagangan</h4>
       </div>
-      <div class="card-body">
-        <table class="table table-striped">
+      <div class="table">
+        <table class="container table-hover table-sm">
           <thead>
             <tr>
               <th>Nama</th>
@@ -60,9 +64,9 @@
               <td>{{ dagangan.nama }}</td>
               <td>{{ 'Rp ' + dagangan.harga }}</td>
                 <td>
-                <button class="btn btn-outline-danger mx-sm-3 mb-2" @click="substractKuantitas(dagangan)">-</button>
+                <button class="btn badge btn-outline-danger" @click="substractKuantitas(dagangan)">-</button>
                 {{ dagangan.kuantitas }}
-                <button class="btn btn-outline-success mx-sm-3 mb-2" @click="addKuantitas(dagangan)">+</button>
+                <button class="btn badge btn-outline-success" @click="addKuantitas(dagangan)">+</button>
                 </td>
               <td>
                 <span class="pointer"
@@ -89,7 +93,7 @@ import daganganRef from './../config';
         newDagangan: {
           nama: '',
           harga: '',
-          kuantitas: 0
+          kuantitas: ''
         }
       }
     },
@@ -104,10 +108,9 @@ import daganganRef from './../config';
         daganganRef.child(dagangan['.key']).remove(); 
       },
       addKuantitas(dagangan) {
-        var newKuantitas = parseInt(dagangan.kuantitas);
         this.newDagangan.nama = dagangan.nama;
         this.newDagangan.harga = dagangan.harga;
-        this.newDagangan.kuantitas = newKuantitas + 1;
+        this.newDagangan.kuantitas = dagangan.kuantitas + 1;
         daganganRef.push(this.newDagangan);
         daganganRef.child(dagangan['.key']).remove();   
         this.newDagangan.nama = '';
@@ -115,10 +118,9 @@ import daganganRef from './../config';
         this.newDagangan.kuantitas = '';
       },
       substractKuantitas(dagangan) {
-        var newKuantitas = parseInt(dagangan.kuantitas);
         this.newDagangan.nama = dagangan.nama;
         this.newDagangan.harga = dagangan.harga;
-        this.newDagangan.kuantitas = newKuantitas - 1;
+        this.newDagangan.kuantitas = dagangan.kuantitas - 1;
         daganganRef.push(this.newDagangan);
         daganganRef.child(dagangan['.key']).remove();   
         this.newDagangan.nama = '';
