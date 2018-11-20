@@ -89,7 +89,7 @@ import daganganRef from './../config';
         newDagangan: {
           nama: '',
           harga: '',
-          kuantitas: ''
+          kuantitas: 0
         }
       }
     },
@@ -101,13 +101,29 @@ import daganganRef from './../config';
           this.newDagangan.kuantitas = '';
       },
       removeDagangan(dagangan) {
-        daganganRef.child(dagangan['.key']).remove();
+        daganganRef.child(dagangan['.key']).remove(); 
       },
-      addKuantitas() {
-
+      addKuantitas(dagangan) {
+        var newKuantitas = parseInt(dagangan.kuantitas);
+        this.newDagangan.nama = dagangan.nama;
+        this.newDagangan.harga = dagangan.harga;
+        this.newDagangan.kuantitas = newKuantitas + 1;
+        daganganRef.push(this.newDagangan);
+        daganganRef.child(dagangan['.key']).remove();   
+        this.newDagangan.nama = '';
+        this.newDagangan.harga = '';
+        this.newDagangan.kuantitas = '';
       },
-      substractKuantitas() {
-
+      substractKuantitas(dagangan) {
+        var newKuantitas = parseInt(dagangan.kuantitas);
+        this.newDagangan.nama = dagangan.nama;
+        this.newDagangan.harga = dagangan.harga;
+        this.newDagangan.kuantitas = newKuantitas - 1;
+        daganganRef.push(this.newDagangan);
+        daganganRef.child(dagangan['.key']).remove();   
+        this.newDagangan.nama = '';
+        this.newDagangan.harga = '';
+        this.newDagangan.kuantitas = '';
       }
     }
   }
