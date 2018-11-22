@@ -4,28 +4,22 @@
       <br>
       <h1 class="display-4">Kafe TETI Firebase Vue</h1>
       <h6>Lower Ground DTETI Depan Workshop</h6>
+      <br>
     </div>
     <div class="card mb-3">
       <div class="card-header">
         <h4>List Dagangan</h4>
       </div>
-      <div class="table-responsive">
-        <table class="table table-sm">
-          <thead>
-            <tr>
-              <th>Nama</th>
-              <th>Harga</th>
-              <th>Stok</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="dagangan in dagangan" :key="dagangan.id">
-              <td>{{ dagangan.nama }}</td>
-              <td>{{ 'Rp ' + dagangan.harga }}</td>
-              <td>{{ dagangan.kuantitas }}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="card-group">
+      <div class="card text-center" v-for="dagangan in dagangan" :key="dagangan.id">
+        <img class="card-img-top" :src="dagangan.gambar" alt="Card image cap">
+        <div class="card-body">
+        <h5 class="card-title">{{ dagangan.nama }}</h5>
+        <p class="card-text">Harga : Rp {{ dagangan.harga }},-
+          <br>
+          Stok Tersisa : {{ dagangan.kuantitas }}</p>
+        </div>
+      </div>
       </div>
     </div>
   </div>
@@ -42,7 +36,8 @@ import daganganRef from './../config';
         newDagangan: {
           nama: '',
           harga: '',
-          kuantitas: ''
+          kuantitas: '',
+          gambar: ''
         }
       }
     }

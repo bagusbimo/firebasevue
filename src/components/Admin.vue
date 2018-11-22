@@ -35,11 +35,18 @@
                placeholder="Harga (Rp)"
                v-model="newDagangan.harga" />
       </div>
+      <div class="form-group row mx-sm-3 mb-2">
+        <label for="gambar" class="sr-only">URL Gambar</label>
+        <input id="gambar"
+               type="text"
+               class="form-control"
+               placeholder="Direct URL Gambar"
+               v-model="newDagangan.gambar" />
+      </div>
       <small id="noduplicate" class="text-muted">
       Pastikan tidak ada data yang terduplikasi
       </small>
-    </form>
-    
+    </form>    
         <div>
         <button class="btn btn-primary btn-sm mx-sm-3 mb-2" @click="addDagangan(dagangan)">Tambahkan</button>
         </div>
@@ -93,7 +100,8 @@ import daganganRef from './../config';
         newDagangan: {
           nama: '',
           harga: '',
-          kuantitas: ''
+          kuantitas: '',
+          gambar: ''
         }
       }
     },
@@ -103,17 +111,16 @@ import daganganRef from './../config';
           this.newDagangan.nama = '';
           this.newDagangan.harga = '';
           this.newDagangan.kuantitas = '';
+          this.newDagangan.gambar = '';
       },
       removeDagangan(dagangan) {
         daganganRef.child(dagangan['.key']).remove(); 
       },
       addKuantitas: function(dagangan) {
-        var newKuantitas = dagangan.kuantitas + 1;
-        daganganRef.child(dagangan['.key']).child('kuantitas').set(newKuantitas)
+        daganganRef.child(dagangan['.key']).child('kuantitas').set(++dagangan.kuantitas)
       },
       substractKuantitas: function(dagangan) {
-        var newKuantitas = dagangan.kuantitas - 1;
-        daganganRef.child(dagangan['.key']).child('kuantitas').set(newKuantitas)
+        daganganRef.child(dagangan['.key']).child('kuantitas').set(--dagangan.kuantitas)
       }
     }
   }
