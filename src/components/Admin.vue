@@ -108,16 +108,12 @@ import daganganRef from './../config';
         daganganRef.child(dagangan['.key']).remove(); 
       },
       addKuantitas: function(dagangan) {
-        this.newDagangan.nama = dagangan.nama;
-        this.newDagangan.harga = dagangan.harga;
-        this.newDagangan.kuantitas = dagangan.kuantitas + 1;
-        daganganRef.child(dagangan['.key']).child('kuantitas').set(this.newDagangan.kuantitas)
+        var newKuantitas = dagangan.kuantitas + 1;
+        daganganRef.child(dagangan['.key']).child('kuantitas').set(newKuantitas)
       },
       substractKuantitas: function(dagangan) {
-        this.newDagangan.nama = dagangan.nama;
-        this.newDagangan.harga = dagangan.harga;
-        this.newDagangan.kuantitas = dagangan.kuantitas - 1;
-        daganganRef.child(dagangan['.key']).child('kuantitas').set(this.newDagangan.kuantitas)
+        var newKuantitas = dagangan.kuantitas - 1;
+        daganganRef.child(dagangan['.key']).child('kuantitas').set(newKuantitas)
       }
     }
   }
