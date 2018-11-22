@@ -60,7 +60,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="dagangan in dagangan" :key="dagangan.id">
+            <tr v-for="dagangan in dagangans" :key="dagangan.id">
               <td>{{ dagangan.nama }}</td>
               <td>{{ 'Rp ' + dagangan.harga }}</td>
                 <td>
@@ -86,7 +86,7 @@ import daganganRef from './../config';
   export default {
     name: 'Admin',
       firebase: {
-        dagangan: daganganRef
+        dagangans: daganganRef
       },
     data(){
       return {
@@ -107,25 +107,13 @@ import daganganRef from './../config';
       removeDagangan(dagangan) {
         daganganRef.child(dagangan['.key']).remove(); 
       },
-      addKuantitas(dagangan) {
-        this.newDagangan.nama = dagangan.nama;
-        this.newDagangan.harga = dagangan.harga;
-        this.newDagangan.kuantitas = dagangan.kuantitas + 1;
-        daganganRef.push(this.newDagangan);
-        daganganRef.child(dagangan['.key']).remove();   
-        this.newDagangan.nama = '';
-        this.newDagangan.harga = '';
-        this.newDagangan.kuantitas = '';
+      addKuantitas: function(dagangan) {
+        var newKuantitas = dagangan.kuantitas + 1;
+        daganganRef.child(dagangan['.key']).child('kuantitas').set(newKuantitas)
       },
-      substractKuantitas(dagangan) {
-        this.newDagangan.nama = dagangan.nama;
-        this.newDagangan.harga = dagangan.harga;
-        this.newDagangan.kuantitas = dagangan.kuantitas - 1;
-        daganganRef.push(this.newDagangan);
-        daganganRef.child(dagangan['.key']).remove();   
-        this.newDagangan.nama = '';
-        this.newDagangan.harga = '';
-        this.newDagangan.kuantitas = '';
+      substractKuantitas: function(dagangan) {
+        var newKuantitas = dagangan.kuantitas - 1;
+        daganganRef.child(dagangan['.key']).child('kuantitas').set(newKuantitas)
       }
     }
   }
