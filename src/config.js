@@ -12,6 +12,5 @@ var config = {
   
   let app = Firebase.initializeApp(config);
   let db = app.database();
-  let daganganRef = db.ref('dagangan');
   
-  export default daganganRef;
+  export default db;

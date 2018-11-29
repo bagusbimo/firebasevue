@@ -1,11 +1,22 @@
 <template>
 <div class="admin">
-    <div class="page-header">
-      <br>
-      <h1>Kafe TETI Firebase Vue Admin</h1>
-    </div>
-    <div class="card">
-  <div class="card-header">
+  <div class="page-header">
+    <br>
+    <h1>Kafe TETI Firebase Vue Admin</h1>
+  </div>
+    Cafe TETI sedang {{ status[2].status }}
+  <div class="card">
+    <v-flex xs12 sm6 class="py-2">
+        <v-btn-toggle>
+          <v-btn depressed value="buka" @click="setBuka()">
+            Buka
+          </v-btn>
+          <v-btn depressed value="tutup" @click="setTutup()">
+            Tutup
+          </v-btn>
+        </v-btn-toggle>
+      </v-flex>
+    <div class="card-header">
     <h4>Tambah Dagangan</h4>
   </div>
   <div class="card-body">
@@ -89,11 +100,12 @@
   </div>
 </template>
 <script>
-import daganganRef from './../config';
+import db from './../config';
   export default {
     name: 'Admin',
       firebase: {
-        dagangans: daganganRef
+        dagangans: db.ref('dagangan'),
+        status: db.ref()
       },
     data(){
       return {
@@ -101,26 +113,39 @@ import daganganRef from './../config';
           nama: '',
           harga: '',
           kuantitas: '',
-          gambar: ''
+          gambar: '',
         }
       }
     },
     methods: {
       addDagangan() {
-        daganganRef.push(this.newDagangan);
+        db.ref('dagangan').push(this.newDagangan);
           this.newDagangan.nama = '';
           this.newDagangan.harga = '';
           this.newDagangan.kuantitas = '';
           this.newDagangan.gambar = '';
       },
       removeDagangan(dagangan) {
-        daganganRef.child(dagangan['.key']).remove(); 
+        db.ref('dagangan').child(dagangan['.key']).remove(); 
       },
       addKuantitas: function(dagangan) {
-        daganganRef.child(dagangan['.key']).child('kuantitas').set(++dagangan.kuantitas)
+        db.ref('dagangan').child(dagangan['.key']).child('kuantitas').set(++dagangan.kuantitas)
       },
       substractKuantitas: function(dagangan) {
-        daganganRef.child(dagangan['.key']).child('kuantitas').set(--dagangan.kuantitas)
+        if(dagangan.kuantitas == 1){
+          db.ref('dagangan').child(dagangan['.key']).remove();
+        }
+        else{
+          db.ref('dagangan').child(dagangan['.key']).child('kuantitas').set(--dagangan.kuantitas)
+        }
+      },
+      setBuka: function(){
+        db.ref().child('state').child('status').set('buka')
+        db.ref().child('state').child('btn').set("success")
+      },
+      setTutup: function(){
+        db.ref().child('state').child('status').set("tutup")
+        db.ref().child('state').child('btn').set("error")
       }
     }
   }
