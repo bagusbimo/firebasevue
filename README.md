@@ -1,4 +1,4 @@
-# vue-firebase
+# Cafe TETI 
 
 > A Vue.js project
 
