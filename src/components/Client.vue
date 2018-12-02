@@ -7,8 +7,8 @@
       <v-btn depressed :color="status[2].btn">
         Cafe TETI sedang {{ status[2].status }}
       </v-btn>
-      <br>
     </div>
+    <br>
         <v-carousel height=250>
           <v-carousel-item
             v-for="(crsl,i) in crsl"
@@ -20,6 +20,7 @@
       <v-app id="inspire">
         <v-layout>
           <v-flex xs12 pa-2>
+            <h3>Ready Stok :</h3>
             <v-card v-for="dagangan in dagangan" :key="dagangan.id">
               <v-img
                 :src="dagangan.gambar"
