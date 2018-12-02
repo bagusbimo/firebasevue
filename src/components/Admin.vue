@@ -6,16 +6,16 @@
   </div>
     Cafe TETI sedang {{ status[2].status }}
   <div class="card">
-    <v-flex xs12 sm6 class="py-2">
-        <v-btn-toggle>
-          <v-btn depressed value="buka" @click="setBuka()">
-            Buka
-          </v-btn>
-          <v-btn depressed value="tutup" @click="setTutup()">
-            Tutup
-          </v-btn>
-        </v-btn-toggle>
-      </v-flex>
+      <v-flex xs12 class="py-2">
+          <v-btn-toggle>
+            <v-btn depressed value="buka" @click="setBuka()">
+              Buka
+            </v-btn>
+            <v-btn depressed value="tutup" @click="setTutup()">
+              Tutup
+            </v-btn>
+          </v-btn-toggle>
+        </v-flex>
     <div class="card-header">
     <h4>Tambah Dagangan</h4>
   </div>

@@ -13,7 +13,7 @@ export default new Router({
       component: Client
     },
     {
-      path: '/admin',
+      path: '/admcft',
       name: 'Admin',
       component: Admin
     }
