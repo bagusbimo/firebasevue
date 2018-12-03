@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/kmteti.png" class="img-fluid" alt="Responsive Image">
+    <img src="./assets/logokafe.png" class="img-fluid" alt="Responsive Image">
     <router-view/>
   </div>
 </template>

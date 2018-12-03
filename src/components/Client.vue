@@ -1,8 +1,6 @@
 <template>
 <div class="admin">
     <div class="page-header">
-      <br>
-      <h1>Kafe TETI Firebase Vue</h1>
       <h6>Lower Ground DTETI Depan Workshop</h6>
       <v-btn depressed :color="status[2].btn">
         Cafe TETI sedang {{ status[2].status }}

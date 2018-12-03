@@ -1,8 +1,7 @@
 <template>
 <div class="admin">
   <div class="page-header">
-    <br>
-    <h1>Kafe TETI Firebase Vue Admin</h1>
+    <h1>Admin Page</h1>
   </div>
     Cafe TETI sedang {{ status[2].status }}
   <div class="card">
